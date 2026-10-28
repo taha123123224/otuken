@@ -1,0 +1,34 @@
+ÖTÜKEN — Üçüncü taraf varlıklar ve lisansları
+=============================================
+
+Oyunda kullanılan hazır varlıkların tamamı ticari kullanıma (Steam dahil) izin veren lisanslara sahiptir.
+
+3D MODELLER VE ANİMASYONLAR
+- Quaternius — Universal Animation Library 1 & 2 (kılıç, dövüş, büyü, balıkçılık, madencilik hareketleri) — CC0 1.0
+  https://quaternius.com/packs/universalanimationlibrary.html
+- Quaternius — Ultimate Animated Animal Pack (kurt, tilki, geyik, karaca, at, boğa) — CC0 1.0
+  https://quaternius.com/packs/ultimateanimatedanimals.html
+- Quaternius — Stylized Nature MegaKit (eğri ve kuru ağaçlar, kayalar, eğrelti, çalı) — CC0 1.0
+  https://quaternius.com/packs/stylizednaturemegakit.html
+- Gövde modeli ve yürüme/koşma kayıtları: "Soldier" (Mixamo, three.js örnekleri) — Mixamo lisansı oyunlarda kullanıma izin verir
+- Yüz taraması: "Lee Perry-Smith" — Infinite-Realities — CC BY 3.0 (atıf gerekli; oyun içi Yardım ekranında yer alır)
+
+SES EFEKTLERİ (hepsi CC0 1.0)
+- Kenney — RPG Audio, Impact Sounds, Interface Sounds, Music Jingles (kenney.nl)
+- "80 CC0 RPG SFX" ve "80 CC0 Creature SFX"
+- Ben Burnes — Organic Wooshes mikro paketi
+- Warfork — oyuncu sesleri (CC0)
+  Derleme: github.com/lavenderdotpet/CC0-Public-Domain-Sounds
+
+MÜZİK
+- FreePD.com — "Journey of Hope", "Infinite Peace", "Magic in the Garden", "Lonely Mountain", "Forest Night",
+  "Adventure", "Heroic Adventure", "Cold Journey", "Night in the Castle", "Dark Hallway", "Behind the Sword",
+  "Epic Boss Battle" — kamu malı (public domain)
+- Komiku — "Le Grand Village", "The Wind", "Time Flutes place" — CC0 1.0
+  Derleme: github.com/SoundSafari/CC0-1.0-Music
+
+YAZILIM
+- three.js r158 — MIT lisansı
+- Yazı tipleri: Alegreya Sans, Marcellus SC, Noto Sans Old Turkic — SIL Open Font License 1.1
+
+Not: Steam'e yüklemeden önce müzik parçalarının kaynak sayfalarındaki lisans bilgisini bir kez daha kontrol etmeniz önerilir.
