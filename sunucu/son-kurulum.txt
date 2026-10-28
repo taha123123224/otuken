@@ -1,0 +1,7 @@
+Tarih: 2026-10-28T19:50:42Z
+Sonuc: 1
+Adres: 
+
+Wrangler requires at least Node.js v22.0.0. You are using v20.20.2. Please update your version of Node.js.
+
+Consider using a Node.js version manager such as https://volta.sh/ or https://github.com/nvm-sh/nvm.
