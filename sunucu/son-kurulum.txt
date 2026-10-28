@@ -1,18 +1,20 @@
-Tarih: 2026-10-28T19:54:46Z
+Tarih: 2026-10-28T20:29:40Z
 Sonuc: 0
 Adres: https://otuken-sunucu.layer-son123123.workers.dev
 
 
  ⛅️ wrangler 4.154.0
 ────────────────────
-Total Upload: 10.63 KiB / gzip: 3.48 KiB
+Total Upload: 11.59 KiB / gzip: 3.83 KiB
 Your Worker has access to the following bindings:
-Binding                Resource            
-env.DUNYA (Dunya)      Durable Object      
+Binding                                                        Resource                  
+env.DUNYA (Dunya)                                              Durable Object            
+env.SUPA_URL ("https://wsdsssdaikdvbnxnkfth.supabase...")      Environment Variable      
+env.SUPA_KEY ("sb_publishable_-JHimwhLN0Ktjh3DSdocWA...")      Environment Variable      
 
-Uploaded otuken-sunucu (3.99 sec)
-Deployed otuken-sunucu triggers (1.26 sec)
+Uploaded otuken-sunucu (1.76 sec)
+Deployed otuken-sunucu triggers (0.39 sec)
   https://otuken-sunucu.layer-son123123.workers.dev
-Current Version ID: b79f5952-009f-494d-829c-0b3e31232306
+Current Version ID: a081ba1d-e739-4e52-8f05-33cbf9148478
 
 Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
