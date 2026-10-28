@@ -1,14 +1,14 @@
 {
- "surum": "9.0.0",
- "tarih": "2026-10-28T18:21:55.940Z",
- "notlar": "",
+ "surum": "9.0.1",
+ "tarih": "2026-10-28T19:01:09.608Z",
+ "notlar": "Yönetim paneli bağlandı, duyurular ve güncelleme bildirimi",
  "minUygulama": "9.0.0",
  "indir": "",
  "dosyalar": [
   {
    "yol": "index.html",
-   "boyut": 757979,
-   "sha256": "2d16d71b6c2c35d6f16ab19484bc560043734d80c725c4cb5e276de285e66532"
+   "boyut": 758122,
+   "sha256": "d47346483554ffdcf253b161efb1b7118fa268fc3f17eac7b824553b4328e3b9"
   },
   {
    "yol": "veri/ha.js",
