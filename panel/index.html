@@ -92,7 +92,7 @@ const fmtN=n=>Number(n||0).toLocaleString('tr-TR');
 const fmtDur=s=>{s=Math.round(s||0);if(s<60)return s+' sn';const m=Math.round(s/60);if(m<60)return m+' dk';const h=Math.floor(m/60);return h+' sa '+(m%60)+' dk';};
 const ago=t=>{const s=(Date.now()-new Date(t))/1000;if(s<90)return 'az önce';if(s<3600)return Math.round(s/60)+' dk önce';if(s<86400)return Math.round(s/3600)+' sa önce';return Math.round(s/86400)+' gün önce';};
 const PLAT={web:'Web',masaustu:'Masaüstü',steam:'Steam'};
-let S={tok:null,ref:null,email:null},data=null,yayin=null,commits=[],q='',timer=null;
+let S={tok:null,ref:null,email:null},data=null,yayin=null,commits=[],q='',timer=null,sunucu=null;
 try{Object.assign(S,JSON.parse(localStorage.getItem('otk_panel')||'{}'));}catch(e){}
 const saveS=()=>{try{localStorage.setItem('otk_panel',JSON.stringify(S));}catch(e){}};
 
@@ -115,6 +115,9 @@ function demoData(){const N=['Kara Alp','Tegin','Böri','Ayaz','Kutlug','Ilgın'
     duyuru:{id:3,metin:'Hafta sonu Metin taşlarından %50 fazla ganimet!',tarih:new Date(now-3600e3).toISOString()}};}
 
 // ---- published version (surum.json on the same site) and recent changes (GitHub)
+async function loadSunucu(){try{const r=await fetch('../sunucu.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)return;const j=await r.json();const h=String(j.ws||'').replace(/^ws/,'http');
+  const d=await (await fetch(h+'/durum',{cache:'no-store'})).json();sunucu={ok:true,n:d.baglanti||0,k:d.kanallar||{}};}catch(e){sunucu={ok:false};}
+  if(DEMO&&!sunucu.ok)sunucu={ok:true,n:9,k:{ch1:6,ch2:3,ch3:0,ch4:0}};}
 async function loadYayin(){if(DEMO){yayin={surum:'9.0.1',tarih:new Date().toISOString(),notlar:'Kurgan Bozkırı yeni görevler, balıkçılık düzeltmeleri'};}else try{const r=await fetch('../surum.json?t='+Date.now(),{cache:'no-store'});if(r.ok)yayin=await r.json();}catch(e){}
   if(!yayin&&DEMO)yayin={surum:'9.0.1',tarih:new Date().toISOString(),notlar:'Kurgan Bozkırı yeni görevler, balıkçılık düzeltmeleri',dosyalar:[{boyut:1}]};
   try{const r=await fetch(`https://api.github.com/repos/${REPO}/commits?per_page=8`);if(r.ok)commits=(await r.json()).map(c=>({m:c.commit.message.split('\n')[0],t:c.commit.author.date}));}catch(e){}
@@ -149,7 +152,7 @@ function render(){const d=data,ys=yayin&&yayin.surum;const on=d.cevrimici||[];
   const list=(d.oyuncular||[]).filter(o=>!q||(o.ad||'').toLowerCase().includes(q.toLowerCase()));
   $('#app').innerHTML=`
   <header class="top"><div class="logo">Ö</div><div><h1>Ötüken Yönetim</h1><div class="sub">${DEMO?'Demo verisi':esc(S.email||'')} · her 20 saniyede yenilenir</div></div><div class="sp"></div>
-    ${ys?`<span class="pill">Yayındaki sürüm <b style="color:var(--bronze-hi)">${esc(ys)}</b></span>`:''}<a class="btn" href="../" target="_blank" rel="noopener">Oyunu aç</a>${DEMO?'':'<button class="btn" id="out">Çıkış</button>'}</header>
+    ${sunucu?`<span class="pill" title="${sunucu.ok?'Kanal 1: '+(sunucu.k.ch1||0)+' · Kanal 2: '+(sunucu.k.ch2||0)+' · Kanal 3: '+(sunucu.k.ch3||0)+' · Kanal 4: '+(sunucu.k.ch4||0):''}"><span class="dot" style="${sunucu.ok?'':'background:var(--bad);animation:none'}"></span>Sunucu ${sunucu.ok?'açık · '+fmtN(sunucu.n)+' bağlantı':'ulaşılamıyor'}</span>`:''}${ys?`<span class="pill">Yayındaki sürüm <b style="color:var(--bronze-hi)">${esc(ys)}</b></span>`:''}<a class="btn" href="../" target="_blank" rel="noopener">Oyunu aç</a>${DEMO?'':'<button class="btn" id="out">Çıkış</button>'}</header>
   ${DEMO&&!ONLINE?'<div class="banner">Bu bir örnek görünümdür. Supabase bağlandığında gerçek oyuncular burada görünür.</div>':''}
   <section class="grid kpis">
     <div class="card kpi hero"><div class="lbl"><span class="dot"></span>Şu an çevrimiçi</div><div class="val">${fmtN(on.length)}</div><div class="hint">${fmtN(on.filter(o=>o.durum==='oyunda').length)} oyunda · ${fmtN(on.filter(o=>o.durum!=='oyunda').length)} menüde</div></div>
@@ -193,7 +196,7 @@ function render(){const d=data,ys=yayin&&yayin.surum;const on=d.cevrimici||[];
   if($('#dx'))$('#dx').onclick=()=>send('');}
 
 async function refreshData(){if(document.activeElement&&document.activeElement.id==='dm'&&document.activeElement.value)return;
-  data=DEMO?(data||demoData()):await rpc('panel_ozet');render();}
+  data=DEMO?(data||demoData()):await rpc('panel_ozet');await loadSunucu();render();}
 async function load(){await loadYayin();
   try{await refreshData();}catch(e){if(/yetkisiz/.test(e.message)){viewLogin('Bu hesap yönetici listesinde değil');return;}if(e.message==='oturum'){viewLogin();return;}viewLogin('Bağlantı hatası: '+e.message);return;}
   clearInterval(timer);timer=setInterval(()=>refreshData().catch(()=>{}),20000);}

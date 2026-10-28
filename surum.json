@@ -1,14 +1,14 @@
 {
- "surum": "9.0.1",
- "tarih": "2026-10-28T19:01:09.608Z",
- "notlar": "Yönetim paneli bağlandı, duyurular ve güncelleme bildirimi",
+ "surum": "9.1.0",
+ "tarih": "2026-10-28T20:07:27.641Z",
+ "notlar": "Çevrimiçi oyun: aynı kanaldaki oyuncular birbirini görür, sohbet, grup, klan",
  "minUygulama": "9.0.0",
  "indir": "",
  "dosyalar": [
   {
    "yol": "index.html",
-   "boyut": 758122,
-   "sha256": "d47346483554ffdcf253b161efb1b7118fa268fc3f17eac7b824553b4328e3b9"
+   "boyut": 770422,
+   "sha256": "23ac5f7345d74abd208633a51056c91f5d11399acd8b0c97aff0dbceecc04638"
   },
   {
    "yol": "veri/ha.js",
