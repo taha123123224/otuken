@@ -1,0 +1,194 @@
+{
+ "surum": "9.0.0",
+ "tarih": "2026-10-28T18:09:52.998Z",
+ "notlar": "",
+ "minUygulama": "9.0.0",
+ "indir": "",
+ "dosyalar": [
+  {
+   "yol": "index.html",
+   "boyut": 757953,
+   "sha256": "bd0bb32749fd19e027bb86d5658d941380fb9a363823c9533718d655e4f0f14d"
+  },
+  {
+   "yol": "veri/ha.js",
+   "boyut": 3509120,
+   "sha256": "b9bc262ffe1ec8848f505f5d60e5db240e82511ee4ef81dfc411ae9247e53309"
+  },
+  {
+   "yol": "veri/hani.js",
+   "boyut": 3025040,
+   "sha256": "e574892459694f044c53b128bdcd35de0ec257be40a147ae8b85bd7bf813a19a"
+  },
+  {
+   "yol": "veri/hnat.js",
+   "boyut": 2114414,
+   "sha256": "5ad6c67fc89904ba8e47824bef573d1f20734c1bb9f95d3f23dd384df05dd3b2"
+  },
+  {
+   "yol": "veri/hu.js",
+   "boyut": 1075482,
+   "sha256": "115bec8c75f1da37153684aa4208a0227259f90b82487c6892f533e14eee7dd9"
+  },
+  {
+   "yol": "veri/sfxb.js",
+   "boyut": 411657,
+   "sha256": "7080ad4338a5e6803956ad26a68cac9983f0878823cf8947e12cea4585de3631"
+  },
+  {
+   "yol": "three.min.js",
+   "boyut": 651651,
+   "sha256": "3b3a1c97de3ce65ec5b28c28d9f2805a738e9651622691ba771aa95c79d41d51"
+  },
+  {
+   "yol": "LISANSLAR.txt",
+   "boyut": 2015,
+   "sha256": "e8ecb607dd3de507faecf256608c1c7410d8a2a7c9270dd8513ee538e5c17d45"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-400-normal.woff2",
+   "boyut": 23708,
+   "sha256": "b2a5a35a2563a2f9bf9fb91939fc6ea6c115e9811cda5c4a37d02f623c7c4dbe"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-500-normal.woff2",
+   "boyut": 23928,
+   "sha256": "55b61d22cc7afd0bca94d17a84f0e92963b8f5216dbfbde56b2f6cf530c9b2dd"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-700-normal.woff2",
+   "boyut": 23976,
+   "sha256": "5acd19a588614d23e52b741a21dd8555178ab4932c3195c6d8fb4b296f84acae"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-800-normal.woff2",
+   "boyut": 23956,
+   "sha256": "93e1e6c3b5ee009ad7ea835a9f2a49a2503644ecca8a0f0c15e27487fb43a75d"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-ext-400-normal.woff2",
+   "boyut": 21276,
+   "sha256": "c76008bc2a70ed1bdfd00cf5639e6a7163b7f1a095e50aac94d8c8dcd5eab337"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-ext-500-normal.woff2",
+   "boyut": 21500,
+   "sha256": "578e5203186650ae0a335692f1ecc71b0591f569f3bbeae7bfcf55874e199514"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-ext-700-normal.woff2",
+   "boyut": 21868,
+   "sha256": "8f289f338a955d3a9d51cd59a0a99e96627fe54d3c54859f4eeeacb9f24b80bc"
+  },
+  {
+   "yol": "fonts/alegreya-sans-latin-ext-800-normal.woff2",
+   "boyut": 21860,
+   "sha256": "53602e2a2e8094e5e5ae226e6be0d6cb423025e0f30db53292e831efa37c34aa"
+  },
+  {
+   "yol": "fonts/fonts.css",
+   "boyut": 5176,
+   "sha256": "e0d8f224db44037167bac614ca0e0b4bf96bba55500193f8da80d5507904bad4"
+  },
+  {
+   "yol": "fonts/marcellus-sc-latin-400-normal.woff2",
+   "boyut": 14508,
+   "sha256": "e62e34398a4821837ce47376299e7883ea3ab277763b8c72716f5c2177bf462c"
+  },
+  {
+   "yol": "fonts/marcellus-sc-latin-ext-400-normal.woff2",
+   "boyut": 8912,
+   "sha256": "a8ba72c1ca8e2da3ab7dbb84bae12e1a735741016783b9b3058f0d3154450ba8"
+  },
+  {
+   "yol": "fonts/noto-sans-old-turkic-latin-400-normal.woff2",
+   "boyut": 15508,
+   "sha256": "57c55da0f64dcb9463125b0ab31caec64461432a8c78544b2f6317dd153e15c4"
+  },
+  {
+   "yol": "fonts/noto-sans-old-turkic-latin-ext-400-normal.woff2",
+   "boyut": 9660,
+   "sha256": "db94d318f2c96f9bb51a4a62e16ceee0a5a6ed038c09f160fe52b2ac173d6ca1"
+  },
+  {
+   "yol": "fonts/noto-sans-old-turkic-old-turkic-400-normal.woff2",
+   "boyut": 6804,
+   "sha256": "0ccb0cf60ca4fdacc2efb11dc4cf6c4c97bace4f64b32c7d7e8dbaf82fe7ee84"
+  },
+  {
+   "yol": "ses/boss1.ogg",
+   "boyut": 1877395,
+   "sha256": "9ed33087e814735e448617dada2c8ef83ab3d1c4197654644b7941b42ad608ee"
+  },
+  {
+   "yol": "ses/boss2.ogg",
+   "boyut": 1591919,
+   "sha256": "0f1f9bd3a008e36ee3b0331cd331eafef584da27ae45408b4e1434b7b2fc54f2"
+  },
+  {
+   "yol": "ses/deep1.ogg",
+   "boyut": 1309414,
+   "sha256": "6ea8c8efe755baf1b6f07f2f867580c822ee518a328efb090c233b749cd8a670"
+  },
+  {
+   "yol": "ses/dungeon1.ogg",
+   "boyut": 2358796,
+   "sha256": "7b7c4359ea557273b26e2d4a51c337e757b902faa797417e701ad67c5ff02fa0"
+  },
+  {
+   "yol": "ses/dungeon2.ogg",
+   "boyut": 566529,
+   "sha256": "927a73eb8319b78c78816662cf09d1e6d470a62fcec4ce9957381dc7bda12df3"
+  },
+  {
+   "yol": "ses/forest1.ogg",
+   "boyut": 1302068,
+   "sha256": "037c0bfe4d5ddd0d32551543400dd83a4b61680e1dd7001de5f49e82775bf6ab"
+  },
+  {
+   "yol": "ses/forest2.ogg",
+   "boyut": 2022434,
+   "sha256": "a8af3143201ce1e2d6b3580a1793f80325da94cc3c584b8703a2b8f1b9ac4c48"
+  },
+  {
+   "yol": "ses/menu1.ogg",
+   "boyut": 3827336,
+   "sha256": "2a44298053785b2939a1449749b6584de070fafcab0a83cdddaee03833054352"
+  },
+  {
+   "yol": "ses/night1.ogg",
+   "boyut": 1448206,
+   "sha256": "ddf66746a50d14790b2a9d6f9501f3c79478be651829ad4b5718af06dc44c951"
+  },
+  {
+   "yol": "ses/snow1.ogg",
+   "boyut": 3101243,
+   "sha256": "7ef4dd3cb3b1e7c1eee541022f5731c6a8deece415ada5ed4d7123f5fc3f1149"
+  },
+  {
+   "yol": "ses/valley1.ogg",
+   "boyut": 891643,
+   "sha256": "a3abd3b2ae54c8cd4d60f02bf9b8499ead64d33ef9a0edd595adcc12c252ae44"
+  },
+  {
+   "yol": "ses/valley2.ogg",
+   "boyut": 1478085,
+   "sha256": "f432b4ebe3e28b4f23606505283da8f334dc1329b8542b69124137e66ef2c13a"
+  },
+  {
+   "yol": "ses/village1.ogg",
+   "boyut": 794100,
+   "sha256": "0014f2da214553408d06b041931f8663b879f81d78246038da5832e075c9e6ea"
+  },
+  {
+   "yol": "ses/village2.ogg",
+   "boyut": 961454,
+   "sha256": "37ed086f89348ba5e4fba586b180a45db8416acbf032d18e50ad3d06d543afb4"
+  },
+  {
+   "yol": "ses/village3.ogg",
+   "boyut": 1807292,
+   "sha256": "ce3671075f7d8f1a5eb1695e459d0abfd785df9c152db2f6fef06ec59da64690"
+  }
+ ]
+}
