@@ -4,6 +4,11 @@ main = "src/index.js"
 compatibility_date = "2025-06-01"
 workers_dev = true
 
+# panel istatistikleri için Supabase (herkese açık "publishable" anahtar)
+[vars]
+SUPA_URL = "https://wsdsssdaikdvbnxnkfth.supabase.co"
+SUPA_KEY = "sb_publishable_-JHimwhLN0Ktjh3DSdocWA_AHf1L8et"
+
 [[durable_objects.bindings]]
 name = "DUNYA"
 class_name = "Dunya"

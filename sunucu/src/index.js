@@ -116,7 +116,19 @@ export class Dunya {
       }
       case 'unsub': { delete st.subs[String(m.id)]; this.save(c); return; }
       case 'set': case 'update': case 'delete': return this.write(c, m);
+      case 'nabiz': return this.nabiz(c, m);
     }
+  }
+
+  // heartbeat for the admin panel, relayed to Supabase (the desktop app runs from file:// where direct calls can be blocked)
+  async nabiz(c, m) {
+    const now = Date.now(); if (now - (c.st.nb || 0) < 20000 || !this.env.SUPA_URL || !this.env.SUPA_KEY) return; c.st.nb = now;
+    const b = m.b && typeof m.b === 'object' ? m.b : null; if (!b) return;
+    const body = {}; for (const k of ['p_id', 'p_oturum', 'p_ad', 'p_sinif', 'p_sv', 'p_bolge', 'p_durum', 'p_surum', 'p_platform', 'p_sure']) if (b[k] !== undefined) body[k] = b[k];
+    try {
+      const r = await fetch(this.env.SUPA_URL.replace(/\/$/, '') + '/rest/v1/rpc/nabiz', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: this.env.SUPA_KEY }, body: JSON.stringify(body) });
+      const j = r.ok ? await r.json() : null; this.send(c.ws, { t: 'nabiz', j });
+    } catch (e) { this.send(c.ws, { t: 'nabiz', j: null }); }
   }
 
   leaveRoom(c, r) { delete c.st.rooms[r]; this.save(c); this.bcast(r, { t: 'pl', r, peer: c.st.peer }); }

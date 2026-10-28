@@ -1,14 +1,14 @@
 {
- "surum": "9.1.0",
- "tarih": "2026-10-28T20:07:27.641Z",
- "notlar": "Çevrimiçi oyun: aynı kanaldaki oyuncular birbirini görür, sohbet, grup, klan",
+ "surum": "9.1.1",
+ "tarih": "2026-10-28T20:28:49.494Z",
+ "notlar": "Masaüstü uygulaması yönetim panelinde görünür",
  "minUygulama": "9.0.0",
  "indir": "",
  "dosyalar": [
   {
    "yol": "index.html",
-   "boyut": 770422,
-   "sha256": "23ac5f7345d74abd208633a51056c91f5d11399acd8b0c97aff0dbceecc04638"
+   "boyut": 770924,
+   "sha256": "1543adabb691b53ca0fa8afef5fa10f1fba9017fbc47d3b199e54a7d69ab49c4"
   },
   {
    "yol": "veri/ha.js",
