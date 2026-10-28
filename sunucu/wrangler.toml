@@ -1,0 +1,16 @@
+# ÖTÜKEN oyun sunucusu — GitHub Actions (.github/workflows/sunucu.yml) bu klasörü Cloudflare'e kurar.
+name = "otuken-sunucu"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+workers_dev = true
+
+[[durable_objects.bindings]]
+name = "DUNYA"
+class_name = "Dunya"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Dunya"]
+
+[observability]
+enabled = true
