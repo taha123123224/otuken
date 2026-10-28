@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ötüken Yönetim</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{--bg:#080b0e;--panel:#10171c;--panel2:#141d23;--rim:#25313a;--rim2:#33424c;--ink:#ebe1c8;--ink2:#b9b09a;--muted:#857f70;
+  --bronze:#c99d58;--bronze-hi:#f0cf8c;--bronze-dim:#6f5733;--bar:#c99d58;--bar-hi:#f0cf8c;--good:#6cc4a4;--bad:#e07a6a;--warn:#e3b34f}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Alegreya Sans",system-ui,sans-serif}
+body{min-height:100vh;background:radial-gradient(1200px 500px at 70% -10%,#2a201233,transparent 60%),var(--bg)}
+h1,h2,h3{font-family:"Marcellus SC",Georgia,serif;font-weight:400;margin:0;letter-spacing:.04em}
+button,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 16px 48px}
+header.top{display:flex;align-items:center;gap:14px;padding:6px 0 18px;border-bottom:1px solid var(--rim);margin-bottom:20px;flex-wrap:wrap}
+.logo{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#f6dc9c,#9c7333);color:#21170a;font:700 18px Georgia,serif;box-shadow:0 0 18px #c99d5844}
+header.top h1{font-size:22px;color:var(--bronze-hi)}header.top .sub{color:var(--muted);font-size:13px}
+.sp{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid var(--rim2);border-radius:999px;font-size:13px;color:var(--ink2);background:var(--panel)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 #6cc4a499;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #6cc4a477}70%{box-shadow:0 0 0 8px #6cc4a400}100%{box-shadow:0 0 0 0 #6cc4a400}}
+.btn{border:1px solid var(--rim2);background:var(--panel2);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;font-size:14px}
+.btn{text-decoration:none;display:inline-block;color:var(--ink)}.btn.pri{color:#21170a}
+.btn:hover{border-color:var(--bronze-dim)}.btn.pri{background:linear-gradient(180deg,#e7c27a,#b8873c);color:#21170a;border-color:#f0cf8c}
+.btn:disabled{opacity:.55;cursor:default}
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(5,1fr)}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--rim);border-radius:14px;padding:16px 18px;min-width:0}
+.card h2{font-size:15px;color:var(--bronze);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2 small{font-family:"Alegreya Sans",sans-serif;color:var(--muted);font-size:12px;letter-spacing:0;margin-left:auto}
+.kpi .lbl{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:7px}
+.kpi .val{font:400 34px/1.1 "Marcellus SC",Georgia,serif;color:var(--ink);margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi.hero .val{color:var(--bronze-hi)}
+.kpi .hint{color:var(--muted);font-size:12px;margin-top:2px}
+.main{grid-template-columns:2fr 1fr;margin-top:16px}
+.two{grid-template-columns:1fr 1fr}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{color:var(--muted);font-weight:500;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;border-bottom:1px solid var(--rim)}
+td{padding:8px;border-bottom:1px solid #1b252c;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right}th.n{text-align:right}
+.tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;border:1px solid var(--rim2);color:var(--ink2)}
+.tag.ok{border-color:#2f6b58;color:var(--good)}.tag.old{border-color:#6b4d2a;color:var(--warn)}
+.scroll{overflow:auto;max-height:420px}
+.empty{color:var(--muted);padding:18px 4px;text-align:center}
+/* bars */
+.chart{position:relative;height:190px;margin-top:4px;overflow:hidden;padding-top:0}
+.chart svg{width:100%;height:100%;display:block;overflow:visible}
+.chart .gl{stroke:#1d2830;stroke-width:1}
+.chart .ax{fill:var(--muted);font-size:11px}
+.chart rect.hit{fill:transparent;cursor:default}
+.chart g.col:hover .b{filter:brightness(1.2)}
+.tip{position:absolute;pointer-events:none;background:#0b1014;border:1px solid var(--rim2);border-radius:8px;padding:6px 10px;font-size:13px;white-space:nowrap;transform:translate(-50%,0);opacity:0;transition:opacity .12s}
+.tip b{color:var(--bronze-hi)}
+.hb{display:grid;grid-template-columns:96px 1fr 44px;align-items:center;gap:10px;margin:7px 0;font-size:14px}
+.hb .tr{height:10px;background:#1a242b;border-radius:4px;overflow:hidden}
+.hb .fl{height:100%;background:var(--bar);border-radius:0 4px 4px 0}
+.hb .v{text-align:right;color:var(--ink2);font-variant-numeric:tabular-nums}
+.hb .k{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+textarea{width:100%;min-height:76px;resize:vertical;background:#0b1014;border:1px solid var(--rim2);border-radius:10px;padding:10px 12px;outline:none}
+textarea:focus,input:focus{border-color:var(--bronze-dim)}
+input.s{background:#0b1014;border:1px solid var(--rim2);border-radius:8px;padding:6px 10px;outline:none;width:180px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.note{color:var(--muted);font-size:13px}
+.cur{border:1px dashed var(--bronze-dim);border-radius:10px;padding:10px 12px;margin-bottom:10px;background:#c99d5810}
+.ver{font:400 30px "Marcellus SC",Georgia,serif;color:var(--bronze-hi)}
+ul.log{list-style:none;margin:0;padding:0;font-size:14px}ul.log li{padding:7px 0;border-bottom:1px solid #1b252c;display:flex;gap:10px}ul.log li span{color:var(--muted);flex:none;width:78px}
+/* login */
+.login{max-width:380px;margin:12vh auto 0;text-align:center}
+.login .card{text-align:left;margin-top:22px}
+.login label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+.login input{width:100%;background:#0b1014;border:1px solid var(--rim2);border-radius:8px;padding:10px 12px;outline:none}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin-top:10px}
+.banner{background:#e3b34f14;border:1px solid #6b4d2a;color:var(--ink2);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:14px}
+@media (max-width:980px){.kpis{grid-template-columns:repeat(3,1fr)}.main,.two{grid-template-columns:1fr}}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}.kpi .val{font-size:28px}.hb{grid-template-columns:80px 1fr 36px}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+// Ötüken yönetim paneli — Supabase (oyuncu istatistikleri, duyuru) + GitHub Pages (yayındaki sürüm)
+const ONLINE=null;
+const REPO='taha123123224/otuken';
+const DEMO=new URLSearchParams(location.search).has('demo');
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtN=n=>Number(n||0).toLocaleString('tr-TR');
+const fmtDur=s=>{s=Math.round(s||0);if(s<60)return s+' sn';const m=Math.round(s/60);if(m<60)return m+' dk';const h=Math.floor(m/60);return h+' sa '+(m%60)+' dk';};
+const ago=t=>{const s=(Date.now()-new Date(t))/1000;if(s<90)return 'az önce';if(s<3600)return Math.round(s/60)+' dk önce';if(s<86400)return Math.round(s/3600)+' sa önce';return Math.round(s/86400)+' gün önce';};
+const PLAT={web:'Web',masaustu:'Masaüstü',steam:'Steam'};
+let S={tok:null,ref:null,email:null},data=null,yayin=null,commits=[],q='',timer=null;
+try{Object.assign(S,JSON.parse(localStorage.getItem('otk_panel')||'{}'));}catch(e){}
+const saveS=()=>{try{localStorage.setItem('otk_panel',JSON.stringify(S));}catch(e){}};
+
+// ---- Supabase (plain REST, no library)
+const U=p=>ONLINE.url.replace(/\/$/,'')+p;
+async function login(email,pass){const r=await fetch(U('/auth/v1/token?grant_type=password'),{method:'POST',headers:{'Content-Type':'application/json',apikey:ONLINE.key},body:JSON.stringify({email,password:pass})});
+  const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error_description||j.msg||'Giriş başarısız');S={tok:j.access_token,ref:j.refresh_token,email};saveS();}
+async function refresh(){if(!S.ref)throw new Error('oturum');const r=await fetch(U('/auth/v1/token?grant_type=refresh_token'),{method:'POST',headers:{'Content-Type':'application/json',apikey:ONLINE.key},body:JSON.stringify({refresh_token:S.ref})});
+  const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error('oturum');S.tok=j.access_token;S.ref=j.refresh_token;saveS();}
+async function rpc(fn,body,again){const r=await fetch(U('/rest/v1/rpc/'+fn),{method:'POST',headers:{'Content-Type':'application/json',apikey:ONLINE.key,Authorization:'Bearer '+S.tok},body:JSON.stringify(body||{})});
+  if(r.status===401&&!again){await refresh();return rpc(fn,body,true);}
+  const j=await r.json().catch(()=>null);if(!r.ok)throw new Error((j&&(j.message||j.hint))||('HTTP '+r.status));return j;}
+
+// ---- demo data (?demo=1)
+function demoData(){const N=['Kara Alp','Tegin','Böri','Ayaz','Kutlug','Ilgın','Tomris','Çağrı','Bilge','Alpay','Oğuz','Aybike'],C=['Savaşçı','Ninja','Sura','Şaman'],B=['Ötüken Köyü','Kara Orman','Kurgan Bozkırı','Sis Bataklığı','Ak Dağlar','Ejder Vadisi'];
+  const now=Date.now(),r=i=>((i*9301+49297)%233280)/233280;const on=[];for(let i=0;i<9;i++)on.push({ad:N[i],sinif:C[i%4],sv:Math.round(8+r(i)*60),bolge:B[i%6],durum:i===7?'menu':'oyunda',surum:i<7?'9.0.1':'9.0.0',platform:['masaustu','web','masaustu','steam'][i%4],oturum_bas:new Date(now-r(i+3)*5400e3).toISOString(),toplam_sn:0});
+  const g=[];for(let d=13;d>=0;d--)g.push({gun:new Date(now-d*864e5).toISOString().slice(0,10),sayi:Math.round(14+d%4*3+(13-d)*2.2+r(d)*9)});
+  const oy=N.map((n,i)=>({ad:n,sinif:C[i%4],sv:Math.round(5+r(i+1)*70),bolge:B[i%6],surum:i%5?'9.0.1':'9.0.0',platform:['masaustu','web','steam'][i%3],ilk:new Date(now-r(i)*20*864e5).toISOString(),son:new Date(now-r(i+7)*3*864e5).toISOString(),oturum_say:1+Math.round(r(i+2)*30),toplam_sn:Math.round(r(i+4)*90000)}));
+  return {cevrimici:on,bugun:47,hafta:132,toplam:318,ort_sure:2460,gunler:g,siniflar:{'Savaşçı':112,'Ninja':86,'Sura':61,'Şaman':59},surumler:{'9.0.1':101,'9.0.0':31},platformlar:{masaustu:178,web:96,steam:44},oyuncular:oy,
+    duyuru:{id:3,metin:'Hafta sonu Metin taşlarından %50 fazla ganimet!',tarih:new Date(now-3600e3).toISOString()}};}
+
+// ---- published version (surum.json on the same site) and recent changes (GitHub)
+async function loadYayin(){if(DEMO){yayin={surum:'9.0.1',tarih:new Date().toISOString(),notlar:'Kurgan Bozkırı yeni görevler, balıkçılık düzeltmeleri'};}else try{const r=await fetch('../surum.json?t='+Date.now(),{cache:'no-store'});if(r.ok)yayin=await r.json();}catch(e){}
+  if(!yayin&&DEMO)yayin={surum:'9.0.1',tarih:new Date().toISOString(),notlar:'Kurgan Bozkırı yeni görevler, balıkçılık düzeltmeleri',dosyalar:[{boyut:1}]};
+  try{const r=await fetch(`https://api.github.com/repos/${REPO}/commits?per_page=8`);if(r.ok)commits=(await r.json()).map(c=>({m:c.commit.message.split('\n')[0],t:c.commit.author.date}));}catch(e){}
+  if(!commits.length&&DEMO)commits=[{m:'Ötüken 9.0.1: Kurgan Bozkırı görevleri',t:new Date().toISOString()},{m:'Ötüken 9.0.0: oyun, veriler ve sürüm bilgisi',t:new Date(Date.now()-864e5).toISOString()}];}
+
+// ---- views
+function viewSetup(){$('#app').innerHTML=`<div class="login"><div class="logo" style="margin:0 auto;width:56px;height:56px;font-size:24px">Ö</div><h1 style="margin-top:14px;color:var(--bronze-hi)">Ötüken Yönetim</h1>
+  <div class="card"><p>Panel henüz veritabanına bağlanmadı.</p><p class="note">Supabase projesinin adresi ve anahtarı oyuna eklendiğinde bu sayfa giriş ekranına dönüşür. Örnek görünüm için <a href="?demo=1" style="color:var(--bronze-hi)">demo panelini aç</a>.</p></div></div>`;}
+function viewLogin(msg){$('#app').innerHTML=`<div class="login"><div class="logo" style="margin:0 auto;width:56px;height:56px;font-size:24px">Ö</div><h1 style="margin-top:14px;color:var(--bronze-hi)">Ötüken Yönetim</h1>
+  <form class="card" id="lf"><label for="em">E-posta</label><input id="em" type="email" autocomplete="username" required value="${esc(S.email||'')}"><label for="pw">Şifre</label><input id="pw" type="password" autocomplete="current-password" required>
+  <button class="btn pri" style="width:100%;margin-top:16px" id="lb">Giriş yap</button><div class="err" id="le">${esc(msg||'')}</div></form></div>`;
+  $('#lf').onsubmit=async e=>{e.preventDefault();$('#lb').disabled=true;$('#le').textContent='';try{await login($('#em').value.trim(),$('#pw').value);await load();}catch(err){$('#le').textContent=err.message==='Invalid login credentials'?'E-posta ya da şifre yanlış':err.message;$('#lb').disabled=false;}};}
+
+function bars(obj,total){const e=Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]);if(!e.length)return '<div class="empty">Henüz veri yok</div>';const mx=Math.max(...e.map(x=>x[1]),1);
+  return e.map(([k,v])=>`<div class="hb"><div class="k">${esc(PLAT[k]||k)}</div><div class="tr"><div class="fl" style="width:${(v/mx*100).toFixed(1)}%"></div></div><div class="v">${fmtN(v)}</div></div>`).join('');}
+function dayChart(g){g=g||[];const W=640,H=190,pl=30,pb=22,pt=8,mx=Math.max(4,...g.map(d=>d.sayi));const nice=Math.ceil(mx/4)*4;const bw=(W-pl)/g.length;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Son 14 günde günlük oyuncu sayısı">`;
+  for(let i=0;i<=4;i++){const y=pt+(H-pt-pb)*(1-i/4);s+=`<line class="gl" x1="${pl}" x2="${W}" y1="${y}" y2="${y}"/><text class="ax" x="${pl-6}" y="${y+4}" text-anchor="end">${Math.round(nice*i/4)}</text>`;}
+  g.forEach((d,i)=>{const h=(H-pt-pb)*d.sayi/nice,x=pl+i*bw+bw*.18,w=bw*.64,y=H-pb-h,dt=new Date(d.gun+'T12:00:00');const today=i===g.length-1;
+    const lab=dt.toLocaleDateString('tr-TR',{day:'numeric',month:'short'});
+    s+=`<g class="col" data-i="${i}"><rect class="hit" x="${pl+i*bw}" y="${pt}" width="${bw}" height="${H-pt-pb}"/><path class="b${today?' today':''}" d="M${x},${H-pb}V${y+Math.min(4,h)}q0,-4 4,-4h${w-8}q4,0 4,4V${H-pb}Z" fill="${today?'var(--bar-hi)':'var(--bar)'}"/>`
+      +(i%2===g.length%2||today?`<text class="ax" x="${x+w/2}" y="${H-6}" text-anchor="middle">${today?'Bugün':lab}</text>`:'')+'</g>';});
+  return s+'</svg><div class="tip" id="tip"></div>';}
+function hookChart(g){const box=$('#dc');if(!box)return;const tip=$('#tip');
+  box.querySelectorAll('g.col').forEach(el=>{el.onmouseenter=()=>{const d=g[+el.dataset.i];const r=el.getBoundingClientRect(),b=box.getBoundingClientRect();
+      tip.innerHTML=`<b>${fmtN(d.sayi)}</b> oyuncu · ${new Date(d.gun+'T12:00:00').toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'})}`;const tw=tip.offsetWidth||160;tip.style.left=Math.max(tw/2,Math.min(b.width-tw/2,r.left-b.left+r.width/2))+'px';tip.style.top='0px';tip.style.opacity=1;};
+    el.onmouseleave=()=>{tip.style.opacity=0;};});}
+
+function render(){const d=data,ys=yayin&&yayin.surum;const on=d.cevrimici||[];
+  const sv=d.surumler||{},tot=Object.values(sv).reduce((a,b)=>a+b,0),guncel=ys?(sv[ys]||0):0;
+  const verTag=v=>`<span class="tag ${v===ys?'ok':'old'}">${esc(v||'-')}</span>`;
+  const list=(d.oyuncular||[]).filter(o=>!q||(o.ad||'').toLowerCase().includes(q.toLowerCase()));
+  $('#app').innerHTML=`
+  <header class="top"><div class="logo">Ö</div><div><h1>Ötüken Yönetim</h1><div class="sub">${DEMO?'Demo verisi':esc(S.email||'')} · her 20 saniyede yenilenir</div></div><div class="sp"></div>
+    ${ys?`<span class="pill">Yayındaki sürüm <b style="color:var(--bronze-hi)">${esc(ys)}</b></span>`:''}<a class="btn" href="../" target="_blank" rel="noopener">Oyunu aç</a>${DEMO?'':'<button class="btn" id="out">Çıkış</button>'}</header>
+  ${DEMO&&!ONLINE?'<div class="banner">Bu bir örnek görünümdür. Supabase bağlandığında gerçek oyuncular burada görünür.</div>':''}
+  <section class="grid kpis">
+    <div class="card kpi hero"><div class="lbl"><span class="dot"></span>Şu an çevrimiçi</div><div class="val">${fmtN(on.length)}</div><div class="hint">${fmtN(on.filter(o=>o.durum==='oyunda').length)} oyunda · ${fmtN(on.filter(o=>o.durum!=='oyunda').length)} menüde</div></div>
+    <div class="card kpi"><div class="lbl">Bugün giren</div><div class="val">${fmtN(d.bugun)}</div><div class="hint">farklı oyuncu</div></div>
+    <div class="card kpi"><div class="lbl">Son 7 gün</div><div class="val">${fmtN(d.hafta)}</div><div class="hint">farklı oyuncu</div></div>
+    <div class="card kpi"><div class="lbl">Toplam oyuncu</div><div class="val">${fmtN(d.toplam)}</div><div class="hint">ilk günden beri</div></div>
+    <div class="card kpi"><div class="lbl">Ort. oturum</div><div class="val">${fmtDur(d.ort_sure)}</div><div class="hint">son 30 gün</div></div>
+  </section>
+  <section class="grid main">
+    <div class="card"><h2>Günlük oyuncular <small>son 14 gün</small></h2><div class="chart" id="dc">${dayChart(d.gunler)}</div></div>
+    <div class="card"><h2>Duyuru <small>oyuncuların ekranında çıkar</small></h2>
+      ${d.duyuru?`<div class="cur"><div class="note">Yayında · ${ago(d.duyuru.tarih)}</div>${esc(d.duyuru.metin)}</div>`:'<p class="note" style="margin-top:0">Şu an yayında duyuru yok.</p>'}
+      <textarea id="dm" maxlength="400" placeholder="Örn: Bu akşam 21:00'de çift deneyim etkinliği!" aria-label="Duyuru metni"></textarea>
+      <div class="row" style="margin-top:10px"><button class="btn pri" id="ds">Duyuruyu gönder</button>${d.duyuru?'<button class="btn" id="dx">Kaldır</button>':''}<span class="note" id="dn"></span></div></div>
+  </section>
+  <section class="grid main">
+    <div class="card"><h2>Çevrimiçi oyuncular <small>${fmtN(on.length)} kişi</small></h2><div class="scroll">${on.length?`<table><thead><tr><th>Karakter</th><th>Sınıf</th><th class="n">Sv.</th><th>Bölge</th><th>Platform</th><th>Sürüm</th><th class="n">Oturum</th></tr></thead><tbody>
+      ${on.map(o=>`<tr><td>${o.durum==='oyunda'?esc(o.ad||'İsimsiz'):'<span class="note">Menüde</span>'}</td><td>${esc(o.sinif||'-')}</td><td class="n">${o.sv||'-'}</td><td>${esc(o.bolge||'-')}</td><td>${esc(PLAT[o.platform]||o.platform)}</td><td>${verTag(o.surum)}</td><td class="n">${fmtDur((Date.now()-new Date(o.oturum_bas))/1000)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Şu an oyunda kimse yok</div>'}</div></div>
+    <div class="card"><h2>Güncellemeler</h2>
+      ${ys?`<div class="ver">${esc(ys)}</div><div class="note">${yayin.tarih?new Date(yayin.tarih).toLocaleString('tr-TR',{dateStyle:'medium',timeStyle:'short'}):''}${yayin.notlar?' · '+esc(yayin.notlar):''}</div>
+        <div style="margin:12px 0 4px" class="note">Son 7 günde gelenlerin <b style="color:var(--ink)">${tot?Math.round(guncel/tot*100):0}%</b> güncel sürümde (${fmtN(guncel)} / ${fmtN(tot)})</div>
+        <div class="hb" style="grid-template-columns:1fr 44px"><div class="tr"><div class="fl" style="width:${tot?guncel/tot*100:0}%;background:var(--good)"></div></div><div class="v">${tot?Math.round(guncel/tot*100):0}%</div></div>`:'<p class="note">Sürüm bilgisi okunamadı.</p>'}
+      <h3 style="font-size:13px;color:var(--muted);margin:16px 0 4px;font-family:inherit;letter-spacing:.06em;text-transform:uppercase">Son değişiklikler</h3>
+      <ul class="log">${commits.length?commits.map(c=>`<li><span>${new Date(c.t).toLocaleDateString('tr-TR',{day:'numeric',month:'short'})}</span>${esc(c.m)}</li>`).join(''):'<li class="note">Okunamadı</li>'}</ul>
+      <p class="note" style="margin-bottom:0">Yeni sürümler Claude tarafından GitHub'a gönderilir; oyuncular bir dakika içinde “Şimdi güncelle” butonunu görür.</p></div>
+  </section>
+  <section class="grid two" style="margin-top:16px">
+    <div class="card"><h2>Sınıflar <small>son 30 gün</small></h2>${bars(d.siniflar)}</div>
+    <div class="card"><h2>Platformlar <small>son 30 gün</small></h2>${bars(d.platformlar)}<h2 style="margin-top:18px">Sürümler <small>son 7 gün</small></h2>${bars(d.surumler)}</div>
+  </section>
+  <section class="card" style="margin-top:16px"><h2>Oyuncular <small>son görülenler</small></h2>
+    <div class="row" style="margin-bottom:10px"><input class="s" id="qs" placeholder="Karakter ara…" value="${esc(q)}" aria-label="Karakter ara"><span class="note">${fmtN(list.length)} kayıt</span></div>
+    <div class="scroll">${list.length?`<table><thead><tr><th>Karakter</th><th>Sınıf</th><th class="n">Sv.</th><th>Son bölge</th><th>Platform</th><th>Sürüm</th><th class="n">Oturum</th><th class="n">Toplam süre</th><th>İlk giriş</th><th>Son görülme</th></tr></thead><tbody>
+      ${list.map(o=>`<tr><td>${esc(o.ad||'İsimsiz')}</td><td>${esc(o.sinif||'-')}</td><td class="n">${o.sv||'-'}</td><td>${esc(o.bolge||'-')}</td><td>${esc(PLAT[o.platform]||o.platform)}</td><td>${verTag(o.surum)}</td><td class="n">${fmtN(o.oturum_say)}</td><td class="n">${fmtDur(o.toplam_sn)}</td><td>${new Date(o.ilk).toLocaleDateString('tr-TR')}</td><td>${ago(o.son)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Kayıt yok</div>'}</div></section>`;
+  hookChart(d.gunler);
+  const qs=$('#qs');qs.oninput=()=>{q=qs.value;const p=qs.selectionStart;render();const n=$('#qs');n.focus();n.setSelectionRange(p,p);};
+  if($('#out'))$('#out').onclick=()=>{S={email:S.email};saveS();clearInterval(timer);viewLogin();};
+  const send=async t=>{if(DEMO){data.duyuru=t?{id:Date.now(),metin:t,tarih:new Date().toISOString()}:null;render();return;}
+    $('#ds').disabled=true;try{await rpc('duyuru_gonder',{p_metin:t});await refreshData();}catch(e){$('#dn').textContent=e.message;$('#ds').disabled=false;}};
+  $('#ds').onclick=()=>{const t=$('#dm').value.trim();if(!t){$('#dn').textContent='Önce bir mesaj yaz';return;}send(t);};
+  if($('#dx'))$('#dx').onclick=()=>send('');}
+
+async function refreshData(){if(document.activeElement&&document.activeElement.id==='dm'&&document.activeElement.value)return;
+  data=DEMO?(data||demoData()):await rpc('panel_ozet');render();}
+async function load(){await loadYayin();
+  try{await refreshData();}catch(e){if(/yetkisiz/.test(e.message)){viewLogin('Bu hesap yönetici listesinde değil');return;}if(e.message==='oturum'){viewLogin();return;}viewLogin('Bağlantı hatası: '+e.message);return;}
+  clearInterval(timer);timer=setInterval(()=>refreshData().catch(()=>{}),20000);}
+if(DEMO)load();else if(!ONLINE||!ONLINE.url)viewSetup();else if(S.tok)load();else viewLogin();
+</script>
+</body>
+</html>

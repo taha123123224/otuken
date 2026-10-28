@@ -1,14 +1,14 @@
 {
  "surum": "9.0.0",
- "tarih": "2026-10-28T18:09:52.998Z",
+ "tarih": "2026-10-28T18:21:55.940Z",
  "notlar": "",
  "minUygulama": "9.0.0",
  "indir": "",
  "dosyalar": [
   {
    "yol": "index.html",
-   "boyut": 757953,
-   "sha256": "bd0bb32749fd19e027bb86d5658d941380fb9a363823c9533718d655e4f0f14d"
+   "boyut": 757979,
+   "sha256": "2d16d71b6c2c35d6f16ab19484bc560043734d80c725c4cb5e276de285e66532"
   },
   {
    "yol": "veri/ha.js",
