@@ -5,8 +5,8 @@
 // WebSocket Hibernation API kullanılır: kimse yokken nesne uyur ve ücret işlemez.
 
 const ROOMS = new Set(['lobby', 'ch1', 'ch2', 'ch3', 'ch4']);
-const MAX_MSG = 8192;              // bytes per incoming message
-const RATE = 40, BURST = 120;      // messages per second per connection
+const MAX_MSG = 16384;             // bytes per incoming message (monster snapshots from the channel host are the largest)
+const RATE = 60, BURST = 160;      // messages per second per connection
 const UID_RE = /^[A-Za-z0-9_-]{8,48}$/;
 const COLS = { players: 300, clans: 300 };
 
@@ -35,7 +35,7 @@ export class Dunya {
     this.ctx = ctx; this.env = env;
     this.conns = new Map();   // peer -> {ws, st}
     this.cache = new Map();   // collection name -> Map(id -> data)
-    this.dirty = new Set(); this.flushT = null;
+    this.dirty = new Set(); this.flushT = null; this.jseq = Date.now() * 10;
     // wake up after hibernation: restore the connection table from the socket attachments
     for (const ws of ctx.getWebSockets()) { const st = ws.deserializeAttachment(); if (st && st.peer) this.conns.set(st.peer, { ws, st }); }
     ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair('{"t":"ping"}', '{"t":"pong"}'));
@@ -61,7 +61,8 @@ export class Dunya {
   conn(ws) { const st = ws.deserializeAttachment(); let c = st && this.conns.get(st.peer); if (!c && st) { c = { ws, st }; this.conns.set(st.peer, c); } return c; }
   inRoom(r) { const out = []; for (const c of this.conns.values()) if (c.st.uid && c.st.rooms[r] !== undefined) out.push(c); return out; }
   bcast(r, o, except) { const s = JSON.stringify(o); for (const c of this.inRoom(r)) if (c.st.peer !== except) this.send(c.ws, s); }
-  peerOf(c, r) { return { peer: c.st.peer, by: c.st.uid, pr: c.st.rooms[r] || {} }; }
+  // js = join order; the oldest peer in a channel simulates its monsters ("host")
+  peerOf(c, r) { return { peer: c.st.peer, by: c.st.uid, pr: c.st.rooms[r] || {}, js: (c.st.js && c.st.js[r]) || 0 }; }
 
   async webSocketMessage(ws, msg) {
     const c = this.conn(ws); if (!c) return;
@@ -91,7 +92,7 @@ export class Dunya {
         const r = String(m.r); if (!ROOMS.has(r)) return;
         if (r !== 'lobby') for (const o of Object.keys(st.rooms)) if (o !== 'lobby' && o !== r) this.leaveRoom(c, o);
         const pr = m.pr && typeof m.pr === 'object' ? m.pr : {};
-        st.rooms[r] = pr; this.save(c);
+        st.rooms[r] = pr; st.js = st.js || {}; st.js[r] = ++this.jseq; this.save(c);
         this.send(c.ws, { t: 'peers', r, peers: this.inRoom(r).map(x => this.peerOf(x, r)) });
         this.bcast(r, { t: 'pj', r, ...this.peerOf(c, r) }, st.peer);
         return;
@@ -131,7 +132,7 @@ export class Dunya {
     } catch (e) { this.send(c.ws, { t: 'nabiz', j: null }); }
   }
 
-  leaveRoom(c, r) { delete c.st.rooms[r]; this.save(c); this.bcast(r, { t: 'pl', r, peer: c.st.peer }); }
+  leaveRoom(c, r) { delete c.st.rooms[r]; if (c.st.js) delete c.st.js[r]; this.save(c); this.bcast(r, { t: 'pl', r, peer: c.st.peer }); }
 
   async webSocketClose(ws) { this.drop(ws); }
   async webSocketError(ws) { this.drop(ws); }
